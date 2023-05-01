@@ -32,15 +32,15 @@ void loop() {
 
     if(switchState0 == 0 && lastSwitchState0 == 1)
     {
-      toggleState =! toggleState;
-      midiSend(channelMsg, controllerMsg, 0x7f);
-      lastSwitchState = 0;
+      toggleState0 =! toggleState0;
+      midiSend(channelMsg0, controllerMsg0, 0x7f);
+      lastSwitchState0 = 0;
     }
     
-    if(switchState == 1 && lastSwitchState == 0)
+    if(switchState0 == 1 && lastSwitchState0 == 0)
     {
-      lastSwitchState = 1;
-      midiSend(channelMsg, controllerMsg, 0x00);
+      lastSwitchState0 = 1;
+      midiSend(channelMsg0, controllerMsg0, 0x00);
     }
   }
 }
