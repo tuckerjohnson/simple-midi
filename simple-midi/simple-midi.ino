@@ -6,7 +6,7 @@ int controllerMsg0 = 0x77;
 int switchPin0 = 2;
 int toggleState0;
 int lastSwitchState0 = 1;
-long unsigned int lastSwitch0;
+long unsigned int lastClose0;
 
 
 // global variables
@@ -26,9 +26,9 @@ void loop() {
   // primary loop, monitors pins and sends midi messages - duplicate for more (increment all variables except debounceTime)
   int switchState0 = digitalRead(switchPin0);
 
-  if((millis() - lastPress0) > debounceTime)
+  if((millis() - lastClose0) > debounceTime)
   {
-    lastPress0 = millis();
+    lastClose0 = millis();
 
     if(switchState0 == 0 && lastSwitchState0 == 1)
     {
