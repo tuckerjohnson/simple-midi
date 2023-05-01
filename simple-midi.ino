@@ -1,44 +1,52 @@
-// midi defs
-int channelMsg = 0xB4;
-int controllerMsg = 0x77;
+// midi variables - duplicate for more (increment variable index, i.e. "int channelMsg1 = XxXX")
+int channelMsg0 = 0xB4;
+int controllerMsg0 = 0x77;
 
-// Button-Pin 
-int buttonPin = 2;
+// Pin variables - duplicate for more (increment variable index)
+int switchPin0 = 2;
+int toggleState0;
+int lastSwitchState0 = 1;
+long unsigned int lastSwitch0;
+
 
 // global variables
-int toggleState;
-int lastButtonState = 1;
-long unsigned int lastPress;
 int debounceTime = 20;
 
 
 void setup() {
-  pinMode(buttonPin, INPUT_PULLUP);
+  // pin setup - duplicate for more (increment variable index, i.e. "switchPin1")
+  pinMode(switchPin0, INPUT_PULLUP);
+  
+  // global setup
   Serial.begin(31250);
 }
 
+
 void loop() {
-  int buttonState = digitalRead(buttonPin);
+  // primary loop, monitors pins and sends midi messages - duplicate for more (increment all variables except debounceTime)
+  int switchState0 = digitalRead(switchPin0);
 
-  if((millis() - lastPress) > debounceTime)
+  if((millis() - lastPress0) > debounceTime)
   {
-    lastPress = millis();
+    lastPress0 = millis();
 
-    if(buttonState == 0 && lastButtonState == 1)
+    if(switchState0 == 0 && lastSwitchState0 == 1)
     {
       toggleState =! toggleState;
-      noteOn(channelMsg, controllerMsg, 0x7f);
-      lastButtonState = 0;
+      midiSend(channelMsg, controllerMsg, 0x7f);
+      lastSwitchState = 0;
     }
-    if(buttonState == 1 && lastButtonState == 0)
+    
+    if(switchState == 1 && lastSwitchState == 0)
     {
-      lastButtonState = 1;
-      noteOn(channelMsg, controllerMsg, 0x00);
+      lastSwitchState = 1;
+      midiSend(channelMsg, controllerMsg, 0x00);
     }
   }
 }
 
-void noteOn(int cmd, int pitch, int velocity) {
+// function for sending midi, should not change
+void midiSend(int cmd, int pitch, int velocity) {
   Serial.write(cmd);
   Serial.write(pitch);
   Serial.write(velocity);
