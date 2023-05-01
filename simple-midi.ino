@@ -1,11 +1,11 @@
-//midi defs
+// midi defs
 int channelMsg = 0xB4;
 int controllerMsg = 0x77;
 
-//Button-Pin 
+// Button-Pin 
 int buttonPin = 2;
 
-// gLv
+// global variables
 int toggleState;
 int lastButtonState = 1;
 long unsigned int lastPress;
@@ -33,7 +33,7 @@ void loop() {
     if(buttonState == 1 && lastButtonState == 0)
     {
       lastButtonState = 1;
-      noteOn(channelMsg, controllerMsg, 0x7f);
+      noteOn(channelMsg, controllerMsg, 0x00);
     }
   }
 }
