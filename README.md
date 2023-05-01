@@ -30,7 +30,7 @@ long unsigned int lastClose1;
 pinMode(switchPin1, INPUT_PULLUP);
 ```
 
-- duplicate contents of primary loop and increment variables (must be duplicated inside of `void loop()` 
+- duplicate contents of primary loop and increment variables (must be duplicated inside of `void loop()` braces)
 
 ```c++
 int switchState1 = digitalRead(switchPin1);
